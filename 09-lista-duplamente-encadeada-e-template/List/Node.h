@@ -1,3 +1,13 @@
+/**
+ * @file Node.h
+ * @author Kalmax Santos
+ * @brief Node parametrizado da lista duplamente encadeada circular
+ * @version 0.1
+ * @date 2022-10-21
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #ifndef NODE_H
 #define NODE_H
 #include <iostream>

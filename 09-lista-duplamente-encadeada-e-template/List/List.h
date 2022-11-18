@@ -1,6 +1,17 @@
+/**
+ * @file List.h
+ * @author Kalmax Santos
+ * @brief Lista duplamente encadeada circular com node sentinela
+ * @version 0.1
+ * @date 2022-10-21
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #ifndef LIST_H
 #define LIST_H
 #include "Node.h"
+#include <stdexcept>
 
 template<typename T>
 class List{
@@ -54,19 +65,23 @@ class List{
         }
 
         T& operator[](int index){
-            Node<T> *aux = this->m_head->next;
+            if(index < 0 || index >= m_size) {
+                throw std::range_error("indice invalido");
+            }
 
+            Node<T> *aux = this->m_head->next;
             for (int i = 0; i < index; i++){
                 aux = aux->next;
             }
             
             return aux->value;
-
         }
 
         const T& operator[](int index) const{
+            if(index < 0 || index >= m_size) {
+                throw std::range_error("indice invalido");
+            }
             Node<T> *aux = this->m_head->next;
-
             for (int i = 0; i < index; i++){
                 aux = aux->next;
             }
@@ -103,6 +118,7 @@ class List{
             }
 
             this->m_head->next = this->m_head->prev = this->m_head;
+            this->m_size = 0;
         }
 
         ~List(){

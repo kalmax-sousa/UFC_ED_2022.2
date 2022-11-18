@@ -14,12 +14,9 @@ int main(){
     List<int> list;
 
     for (int i = 1; i <= 9; i++)
-    {
         list.push_back(i);
-    }
 
-    for (List<int>::iterator it = list.begin(); it != list.end(); ++it)
-    {
+    for (List<int>::iterator it = list.begin(); it != list.end(); ++it){
         cout << *it << " ";
     }
 
