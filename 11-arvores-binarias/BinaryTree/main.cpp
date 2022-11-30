@@ -10,8 +10,17 @@ int main() {
     BinaryTree t55(55, tnull, tnull);
     BinaryTree t1(1, t76, t55);
 
-    //t1.print_keys();
 
     cout << t1.contains(100) << endl;
     cout << t1.contains(34) << endl;
+
+    t1.print_keys();
+    t1.preordem();
+    t1.ordemsimetrica();
+    t1.posordem();
+
+    cout << t1.serialization() << endl;
+
+    BinaryTree test(t1.serialization());
+    test.print_keys();
 }
