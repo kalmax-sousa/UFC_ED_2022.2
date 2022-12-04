@@ -26,10 +26,6 @@ void queimar(vector<string>& matriz, const Ponto& inicio){
                vizinhos[i].l >= (int)matriz.size() || vizinhos[i].c >= (int)matriz[0].size() ||
                matriz[vizinhos[i].l][vizinhos[i].c] == '.' || 
                matriz[vizinhos[i].l][vizinhos[i].c] == 'o'){
-                   //cout<< "AQ"<< endl;
-                   //cout<< matriz[vizinhos[i].l][vizinhos[i].c] << endl;
-                   //cout<< vizinhos[i].l << " " << vizinhos[i].c<< endl;
-                   //cout<< (int)matriz.size() << " " << (int)matriz[0].size() << endl;
                 vizinhos.erase(vizinhos.begin() + i);
             }else {
                 i++;
