@@ -15,14 +15,12 @@ struct Node {
     }
 };
 
-
 // Construtor
 Tree::Tree(std::string serial) {
     _root = nullptr;
     std::stringstream ss(serial);
     _serializeTree(ss, &_root);
 }
-
 
 void Tree::_serializeTree(std::stringstream& ss, Node **node) {
     std::string value;
@@ -35,11 +33,9 @@ void Tree::_serializeTree(std::stringstream& ss, Node **node) {
     _serializeTree(ss, &((*node)->right));
 }
 
-
 Tree::~Tree() {
     _root = _clear(_root);
 }
-
 
 Node *Tree::_clear(Node *node) {
     if(node != nullptr) { // caso geral: vamos liberar essa arvore
@@ -145,5 +141,3 @@ Node* Tree::_delete_leaves_with_value(int key, Node *node) { // TODO
         return node;
     }
 }
-
-

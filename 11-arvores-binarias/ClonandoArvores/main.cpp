@@ -3,8 +3,7 @@
 #include "Tree.h"
 using namespace std;
 
-int main()
-{
+int main(){
 	string line1, line2;
     getline(cin, line1);
     getline(cin, line2);

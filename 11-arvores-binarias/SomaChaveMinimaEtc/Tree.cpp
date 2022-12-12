@@ -16,7 +16,6 @@ struct Node {
     }
 };
 
-
 Tree::Tree(std::string serial) {
     _root = nullptr;
     std::stringstream ss(serial);
@@ -96,7 +95,6 @@ int Tree::min_key() {
     return _min_key(_root);
 }
 
-
 // Supoe que o ponteiro recebido sempre eh diferente de nullptr
 int Tree::_min_key(Node *node) {
     if(node->left != nullptr && node->right != nullptr){
@@ -150,5 +148,3 @@ int Tree::_um_filho(Node *node) { // TODO
         
     return 1 + _um_filho(node->right) + _um_filho(node->left);
 }
-
-

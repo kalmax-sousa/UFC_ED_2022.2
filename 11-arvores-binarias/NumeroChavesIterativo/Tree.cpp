@@ -1,7 +1,9 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <stack>
 #include "Tree.h"
+using namespace std;
 
 struct Node {
     int key;
@@ -15,16 +17,16 @@ struct Node {
     }
 };
 
-// Construtor
 Tree::Tree(std::string serial) {
     _root = nullptr;
     std::stringstream ss(serial);
     _serializeTree(ss, &_root);
 }
 
-// Essa funcao recursiva recebe como entrada uma string contendo 
-// uma versao serializada da arvore e recebe um ponteiro para ponteiro para o no raiz.
-// A funcao ler os dados e constroi a arvore seguindo um percurso em pre-ordem.
+Tree::~Tree() {
+    _root = _clear(_root);
+}
+
 void Tree::_serializeTree(std::stringstream& ss, Node **node) {
     std::string value;
     ss >> value;
@@ -36,13 +38,6 @@ void Tree::_serializeTree(std::stringstream& ss, Node **node) {
     _serializeTree(ss, &((*node)->right));
 }
 
-// Destrutor
-Tree::~Tree() {
-    _root = _clear(_root);
-}
-
-// Essa funcao recebe uma raiz chamada node e
-// ela libera todos os nos decendentes de node e o proprio node.
 Node *Tree::_clear(Node *node) {
     if(node != nullptr) { // caso geral: vamos liberar essa arvore
         node->left = _clear(node->left);
@@ -50,19 +45,6 @@ Node *Tree::_clear(Node *node) {
         delete node;
     }
     return nullptr;
-}
-
-void Tree::inorder() {
-    _inorder(_root);
-    std::cout << std::endl;
-}
-
-void Tree::_inorder(Node *node) {
-    if(node != nullptr) { // Caso Geral
-        _inorder(node->left);
-        std::cout << node->key << " ";
-        _inorder(node->right);  
-    }
 }
 
 void Tree::bshow(){
@@ -85,38 +67,35 @@ void Tree::_bshow(Node *node, std::string heranca) {
         _bshow(node->left, heranca + "l");
 }
 
+
 int Tree::size() {
-    return _size(_root);
+    return _size_iterativo(_root);
 }
 
-int Tree::_size(Node *node) { // TODO
-    if(node == nullptr) return 0;
+int Tree::_size_iterativo(Node *node) {
+    int nodes = 0;
+    if(node != nullptr){
+        stack<Node *> stk;
+        stk.push(node);
         
-    return 1 + _size(node->left) + _size(node->right);
-}
-
-int Tree::height() {
-    return _height(_root);
-}
-
-int Tree::_height(Node *node) {
-    if(node == nullptr) return 0;
-    if(node->left != nullptr && node->right != nullptr){
-        int left = _height(node->left);
-        int right = _height(node->right);
-        
-        if(left > right){
-            return 1 + left;
-        } 
-        else{
-            return 1 + right;
+        while(!stk.empty()){
+            Node *temp = stk.top();
+            stk.pop();
+            nodes++;
+            
+            if(temp->left != nullptr){
+                stk.push(temp->left);
+            }
+            
+            if(temp->right != nullptr){
+                stk.push(temp->right);
+            }
         }
+        
+        
     }
-    else if(node->left == nullptr && node->right != nullptr){
-        return 1 + _height(node->right);
-    }
-    else if(node->left != nullptr && node->right == nullptr){
-        return 1 + _height(node->left);
-    }
-    else return 1;
+    return nodes;
 }
+
+
+

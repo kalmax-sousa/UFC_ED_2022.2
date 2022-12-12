@@ -82,7 +82,6 @@ void Tree::_bshow(Node *node, std::string heranca) {
         _bshow(node->left, heranca + "l");
 }
 
-
 bool Tree::identical(Tree *t) {
     return _identical(_root, t->_root);
 }
@@ -115,5 +114,3 @@ Node *Tree::_clone(Node *node) {
 
     return _root_tree;
 }
-
-
